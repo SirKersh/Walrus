@@ -4,6 +4,8 @@ import org.kie.api.KieServices;
 import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
 
+import alert.Alert;
+
 import java.util.Scanner;
 import sensor.*;
 
@@ -30,7 +32,7 @@ public class DecisionTableTest
             kSession.insert(kitchenHeatSensor);
             kSession.insert(LivingQuartersSmokeSensor);
             kSession.insert(LivingQuartersHeatSensor);
-            
+
             //Fire the rules engine
             kSession.fireAllRules(); 
             
