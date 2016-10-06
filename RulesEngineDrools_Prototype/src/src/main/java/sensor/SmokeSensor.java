@@ -1,27 +1,26 @@
-package alarm;
+package sensor;
 
 import java.util.Random;
 
-public class FireAlarm implements Alarm
+public class SmokeSensor implements Sensor
 {
-	//alarms have sensors
 	private int status;
 	private String message;
 	private String location;
 
 	/**
-	 * Set the status of the alarm
-	 * @param status the status of the alarm. 1 for triggered, 0 for not triggered
+	 * Set the status of the sensor
+	 * @param status the status of the sensor. 1 for triggered, 0 for not triggered
 	 */
-	public FireAlarm(String location)
+	public SmokeSensor(String location)
 	{
 		this.status = NOT_TRIGGERED;
 		this.location = location;
 	}
 
 	/**
-	 * Return the status of the alarm
-	 * @return status of the alarm
+	 * Return the status of the sensor
+	 * @return status of the sensor
 	 */
 	public int getStatus() {
 		return status;
@@ -38,8 +37,8 @@ public class FireAlarm implements Alarm
 	}
 
 	/**
-	 * Return the message from the alarm
-	 * @return the message from the alarm
+	 * Return the message from the sensor
+	 * @return the message from the sensor
 	 */
 	public String getMessage() {
 		return message;
@@ -54,8 +53,8 @@ public class FireAlarm implements Alarm
 	}
 
 	/**
-	 * Set the location of the alarm
-	 * @param location the location of the alarm
+	 * Set the location of the sensor
+	 * @param location the location of the sensor
 	 */
 	public void setLocation(String location) 
 	{
@@ -64,8 +63,8 @@ public class FireAlarm implements Alarm
 	}
 
 	/**
-	 * Return the location of the alarm.
-	 * @return the location of the alarm
+	 * Return the location of the sensor.
+	 * @return the location of the sensor
 	 */
 	public String getLocation() 
 	{
@@ -73,13 +72,15 @@ public class FireAlarm implements Alarm
 	}
 
 	/**
-	 * Randomize the status of the alarm
+	 * Randomize the status of the sensor
 	 */
 	public void randomizeStatus() 
 	{
-		Random rand = new Random();
-		int randStatus = rand.nextInt(2);
-
-		status = randStatus;
+		 Random rand = new Random();
+		 int randStatus = rand.nextInt(2);
+		 
+		 status = randStatus;
+		
 	}
+
 }
