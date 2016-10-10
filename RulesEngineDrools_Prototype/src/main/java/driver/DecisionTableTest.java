@@ -55,6 +55,7 @@ public class DecisionTableTest
             	//randomize the status of the sensors in the alarms to signal data actively effecting the sensor
             	randomizer.randomize(alarms);
             	
+            	
             	//create a new session and add rules to it
             	kSession = kContainer.newKieSession("ksession-dtables");
             	
@@ -63,6 +64,7 @@ public class DecisionTableTest
                 {
                 	kSession.insert(alarm);
                 }
+                
             
             	//Fire the rules engine
             	kSession.fireAllRules();
