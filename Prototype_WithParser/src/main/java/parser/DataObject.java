@@ -7,13 +7,13 @@ import java.util.Map;
 public class DataObject 
 {	
 	//HashMap simulating parameters
-	private Map<String,Object> params;
+	private Map<String,String> params;
 	
 	/**
 	 * Constructor for DataObject
 	 * @param parameters the parameters
 	 */
-	public DataObject(HashMap<String, Object> parameters)
+	public DataObject(HashMap<String, String> parameters)
 	{
 		this.params = parameters;
 	}
@@ -27,7 +27,7 @@ public class DataObject
 	 * Update the hashmap of the DataObject
 	 * @param hm the hashmap to be updated
 	 */
-	public void updateData(HashMap<String, Object> hm)
+	public void updateData(HashMap<String, String> hm)
 	{
 		params = hm;
 	}

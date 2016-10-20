@@ -16,13 +16,14 @@ public class ParserTest
     	
     		try {
     			DataObject dataObj = parser.parse("mysensor.csv");
-    			//System.out.println(dataObj.toString());
+    			//System.out.println(dataObj.getField("val8").getClass());
         	
             // load up the knowledge base
 	        KieServices ks = KieServices.Factory.get();
     	    KieContainer kContainer = ks.getKieClasspathContainer();
-        	KieSession kSession = kContainer.newKieSession("ksession-dtables");
-        	
+    	    KieSession kSession = kContainer.newKieSession("ksession-rules");
+    	    //KieSession kSession = kContainer.newKieSession("ksession-dtables");
+    	    
             //Instantiate the scanner and alarms
         	Scanner scanner = new Scanner(System.in);
             
@@ -41,7 +42,8 @@ public class ParserTest
     			//System.out.println(dataObj.toString());
             	
             	//create a new session and add rules to it
-            	kSession = kContainer.newKieSession("ksession-dtables");         
+            	kSession = kContainer.newKieSession("ksession-rules");  
+            	//kSession = kContainer.newKieSession("ksession-dtables");
             	kSession.insert(dataObj);
             	
             	//Fire the rules engine

@@ -8,7 +8,7 @@ import java.util.HashMap;
 public class Parser 
 {
 	BufferedReader reader;
-	HashMap<String, Object> hashMap = new HashMap<String, Object>();
+	HashMap<String, String> hashMap = new HashMap<String, String>();
 	String headers[];
 	
 	/**
@@ -26,7 +26,7 @@ public class Parser
 		headers = reader.readLine().split(",");
 		
 		//save the FIRST line of data to an array so it can be used to store into the hashmap
-		Object data[] = reader.readLine().split(",");
+		String data[] = reader.readLine().split(",");
 		
 		//populate the hashmap with header and data
 		for(int i = 0; i < headers.length; i++)
@@ -46,10 +46,10 @@ public class Parser
 	public void update(DataObject dataObj) throws IOException
 	{
 		//read in a new line of data from the CSV
-		Object data[] = reader.readLine().split(",");
+		String data[] = reader.readLine().split(",");
 		
 		//reinitialize the hashmap
-		hashMap = new HashMap<String, Object>();
+		hashMap = new HashMap<String, String>();
 		
 		//populate the hashmap with header and data
 		for(int i = 0; i < headers.length; i++)
@@ -66,7 +66,7 @@ public class Parser
 	 * @param hm the hashmap for the DataoOject
 	 * @return the dataObject
 	 */
-	public DataObject createObj(HashMap<String, Object> hm)
+	public DataObject createObj(HashMap<String, String> hm)
 	{
 		DataObject dataObj = new DataObject(hm);
 		
