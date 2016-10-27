@@ -1,7 +1,0 @@
-package a
-
-
-rule "name"
-	when
-	then
-end
