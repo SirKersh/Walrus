@@ -23,6 +23,14 @@ public class DataObject
 		return params.get(key);
 	}
 	
+	public boolean hasField(String key)
+	{
+		 if(params.get(key)!=null)
+			 return true;
+		 return false;
+					
+	}
+	
 	public int getFieldInt(String key)
 	{
 		return Integer.parseInt(params.get(key));

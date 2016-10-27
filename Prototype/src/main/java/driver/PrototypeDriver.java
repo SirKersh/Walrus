@@ -9,23 +9,20 @@ import java.io.IOException;
 import java.util.Scanner;
 import parser.*;
 import ruleCreator.RuleFactory;
+import java.util.ArrayList;
 
 public class PrototypeDriver {
 
 	public static void main(String[] args) {
-		Parser parser = new Parser();
 		Scanner scanner = new Scanner(System.in);
-		DataObject dataObj = null;
+		ArrayList<DataObject> dataObj = new ArrayList<DataObject>();
+		ArrayList<Parser> parsers = new ArrayList<Parser>();
 		try {
 			// load up the knowledge base
 			KieServices ks = KieServices.Factory.get();
 			KieContainer kContainer = ks.getKieClasspathContainer();
 			KieSession kSession = kContainer.newKieSession("ksession-rules");
-
-			kSession.insert(dataObj);
-
-			// Fire the rules engine
-			kSession.fireAllRules();
+			
 			int option = 0;
 			System.out.println("Welcome to the Rules Engine Prototype.");
 			while (option != 5) {
@@ -42,80 +39,85 @@ public class PrototypeDriver {
 				case 1:
 					System.out.println("Please input a filename.");
 					String filename = scanner.nextLine();
-					RuleFactory rf = new RuleFactory(filename, "src/main/resources/rules",scanner);
-					
+					RuleFactory rf = new RuleFactory(filename, "src/main/resources/rules", scanner);
+
 					try {
 						rf.createRule();
 					} catch (IOException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-					
+
 					break;
 				case 2:
-					dataObj = selectLogFile(scanner, parser);
+					//Create new parser for the Log File 
+					Parser parser = new Parser();
+					parsers.add(parser);
+					selectLogFile(scanner, parser,dataObj);
 					break;
 				case 3:
-					if (dataObj != null) {
-						// create a new session and add rules to it
-						ks = KieServices.Factory.get();
-						kContainer = ks.getKieClasspathContainer();
-						kSession = kContainer.newKieSession("ksession-rules");
-						// kSession =
-						// kContainer.newKieSession("ksession-dtables");
-						kSession.insert(dataObj);
-
-						// Fire the rules engine
-						kSession.fireAllRules();
-
-						// Trash the rules
-						kSession.dispose();
-						boolean x = parser.update(dataObj);
-						if (x == true) // logfile is out of lines
+					if (dataObj.size()>0) {
+						for(int i=0;i<dataObj.size();i++)
 						{
-							dataObj = null;
+							// create a new session and add rules to it
+							kSession = kContainer.newKieSession("ksession-rules");
+							kSession.insert(dataObj.get(i));
+
+							// Fire the rules engine
+							kSession.fireAllRules();
+
+							// Trash the rules
+							kSession.dispose();
+							// Update the specific parser
+							boolean x = parsers.get(i).update(dataObj.get(i)); 
+							// If logfile is out of lines
+							if (x == true) 
+							{
+								dataObj.remove(i);
+								parsers.remove(i);
+								System.out.println("Remove");
+							} 
 						}
-					} else
+					}
+					 else
 						System.out.println("No Logfile Selected.");
 					break;
 				case 4:
-					if (dataObj != null) {
-					while(dataObj!=null)
-					{
-						// create a new session and add rules to it
-						ks = KieServices.Factory.get();
-						kContainer = ks.getKieClasspathContainer();
-						kSession = kContainer.newKieSession("ksession-rules");
+					if (dataObj.size()>0) {
+						while (dataObj.size()>0) {
+							for(int i=0;i<dataObj.size();i++)
+							{
+								// create a new session and add rules to it
+								kSession = kContainer.newKieSession("ksession-rules");
+								kSession.insert(dataObj.get(i));
 
-						kSession.insert(dataObj);
-
-						// Fire the rules engine
-						kSession.fireAllRules();
-
-						// Trash the rules
-						kSession.dispose();
-						boolean x = parser.update(dataObj);
-						if (x == true) // logfile is out of lines
-						{
-							dataObj = null;
+								// Fire the rules engine
+								kSession.fireAllRules();
+								// Trash the rules
+								kSession.dispose();
+								// Update the specific parser
+								boolean x = parsers.get(i).update(dataObj.get(i));
+								// If logfile is out of lines
+								if (x == true) 
+								{
+									dataObj.remove(i);
+									parsers.remove(i);
+								}
+							}
 						}
 					}
-					}
-					else
-					{
+					 else {
 						System.out.println("No Logfile Selected.");
 					}
 					break;
 				case 5:
-					//End Program
+					// End Program
 					break;
 				default:
 					System.out.println("Invalid Input.");
 					break;
 				}
 				System.out.println();
-
-				// System.out.println(dataObj.toString());
 
 			}
 
@@ -130,7 +132,8 @@ public class PrototypeDriver {
 
 	}
 
-	public static DataObject selectLogFile(Scanner scanner, Parser parser) throws IOException {
+	public static void selectLogFile(Scanner scanner, Parser parser,ArrayList<DataObject> dataObj)
+			throws IOException {
 		System.out.println("Please input the csv filename");
 		String csvFile = scanner.nextLine();
 		while (!(new File(csvFile + ".csv").exists())) {
@@ -139,7 +142,8 @@ public class PrototypeDriver {
 			csvFile = scanner.nextLine();
 		}
 		System.out.println("LogFile " + csvFile + ".csv has been Imported.");
-		return parser.parse(csvFile + ".csv");
+		
+		dataObj.add(parser.parse(csvFile + ".csv"));
 	}
 
 	public static void runOnce(DataObject dataObj, Parser parser, KieSession kSession, KieContainer kContainer)

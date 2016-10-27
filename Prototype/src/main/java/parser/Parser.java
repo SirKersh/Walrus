@@ -7,7 +7,7 @@ import java.util.HashMap;
 
 public class Parser {
 	BufferedReader reader;
-	HashMap<String, String> hashMap = new HashMap<String, String>();
+	//HashMap<String, String> hashMap = new HashMap<String, String>();
 	String headers[];
 
 	/**
@@ -19,6 +19,7 @@ public class Parser {
 	 * @throws IOException
 	 */
 	public DataObject parse(String fileName) throws IOException {
+		HashMap<String, String> hashMap = new HashMap<String, String>();
 		// read in the CSV file.
 		reader = new BufferedReader(new FileReader(fileName));
 
@@ -47,6 +48,7 @@ public class Parser {
 	 * @throws IOException
 	 */
 	public boolean update(DataObject dataObj) throws IOException {
+		HashMap<String, String> hashMap = new HashMap<String, String>();
 		// read in a new line of data from the CSV
 		String line;
 
