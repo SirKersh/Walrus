@@ -3,7 +3,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>RulesEngineSimulator_Drools.group</groupId>
-  <artifactId>RulesEngineSimulator_Drools.artifact</artifactId>
+  <groupId>RulesEngineDrools_Prototype.group</groupId>
+  <artifactId>RulesEngineDrools_Prototype.artifact</artifactId>
   <version>1.0</version>
 </project>
