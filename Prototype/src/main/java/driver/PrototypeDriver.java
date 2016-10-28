@@ -47,6 +47,13 @@ public class PrototypeDriver {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
+					
+					System.out.println("Rule changes have been saved. To apply changes, please restart the application and refresh the rule folder.");
+					System.out.println("Would you like to exit? Y/N?");
+					s = scanner.nextLine();
+					
+					if(s.equals("Y"))
+						System.exit(0);
 
 					break;
 				case 2:
