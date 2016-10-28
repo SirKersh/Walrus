@@ -81,7 +81,15 @@ public class PrototypeDriver {
 					if (dataObj.size() > 0) {
 						for (int i = 0; i < dataObj.size(); i++) {
 							// create a new session and add rules to it
-							kSession = kContainer.newKieSession("ksession-rules");
+							//kSession = kContainer.newKieSession("ksession-rules");
+							
+							if(newRuleMade){
+								kSession = kBase.newKieSession();
+							}
+							else{
+								kSession = kContainer.newKieSession("ksession-rules");
+							}
+							
 							kSession.insert(dataObj.get(i));
 
 							// Fire the rules engine
