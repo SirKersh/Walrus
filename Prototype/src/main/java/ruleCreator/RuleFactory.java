@@ -44,12 +44,12 @@ public class RuleFactory
 	 * CreateRule uses RuleMaker's createRule() inorder to build the duplicated part of a .drl file
 	 * @throws IOException
 	 */
-	public void createRule() throws IOException
+	public String createRule() throws IOException
 	{
 		String temp = "";
 		int counter = 0;
 
-		writer = new BufferedWriter(new FileWriter(new File(directoryName + "//" + ruleName + ".drl")));
+		writer = new BufferedWriter(new FileWriter(new File("src//main//resources//rules//" + ruleName + ".drl")));
 
 		System.out.println("You are about to create a rule file. A rule file can have multiple rules inside of it.");
 		System.out.println("When you are finished writing all your rules please type 'stop' to finish. You can NOT stop mid rule");
@@ -97,6 +97,7 @@ public class RuleFactory
 		writer.write(ruleToBeWritten);
 		writer.flush();
 		//scan.close();
+		return "src/main/resources/rules/" + ruleName + ".drl";
 	}
 
 }

@@ -13,6 +13,7 @@ rule "Start Fire Alarm"
 	then
 		 System.out.println("At time: "+ dataObject.getField("Time").toString() + " ~ Fire Alarm Activated!!!");
 end
+/*
 rule "Check Power"
 	when
 		dataObject : DataObject()
@@ -20,3 +21,4 @@ rule "Check Power"
 	then
 		System.out.println("At time: "+ dataObject.getField("Time").toString() + " ~ Main Power Low!!!");
 end
+*/
