@@ -1,0 +1,12 @@
+package rules
+
+import parser.DataObject;
+
+rule "erun"
+	when
+//		logName : 
+		dataObject : DataObject()
+		 eval(dataObject.getField("Manual Fire Alarm Activation").equals("1"))
+	then
+		System.out.println("RUN");
+end
