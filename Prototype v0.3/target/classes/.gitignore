@@ -1,0 +1,12 @@
+/META-INF/
+/data.xml
+/driver/
+/dtables/
+/parser/
+/ruleContainer/
+/rules/
+/rulestestRule.drl
+/rulestestRule1.drl
+/run.drl
+/style.xsl
+/testRule1.drl

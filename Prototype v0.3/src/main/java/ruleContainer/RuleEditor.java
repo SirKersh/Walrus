@@ -6,13 +6,24 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import driver.PrototypeDriver;
+import org.kie.api.KieServices;
+import org.kie.api.builder.KieFileSystem;
+
+import driver.Prototype;
 
 public class RuleEditor 
 {
 	//Array lists that represent all activated and unactivated rules.
 	ArrayList<String> activeRules = new ArrayList<String>();
 	ArrayList<String> inActiveRules = new ArrayList<String>();
+	KieFileSystem kfs;
+	KieServices ks;
+	
+	public RuleEditor(KieFileSystem kfs,KieServices ks)
+	{
+		this.kfs = kfs;
+		this.ks = ks;
+	}
 
 	/**
 	 * Displays all the active rules
@@ -62,7 +73,7 @@ public class RuleEditor
 		}
 		FileInputStream fis;
 		fis = new FileInputStream("src/main/resources/rules/" + fileName);
-		PrototypeDriver.kfs.write("src/main/resources/" + fileName, PrototypeDriver.ks.getResources().newInputStreamResource(fis));
+		kfs.write("src/main/resources/" + fileName, ks.getResources().newInputStreamResource(fis));
 		activeRules.add(fileName);
 		if(inActiveRules.contains(fileName))
 		{
@@ -114,7 +125,7 @@ public class RuleEditor
 			System.out.println("There does not exist a drl file with this name.");
 			return;
 		}
-		PrototypeDriver.kfs.delete("src/main/resources/" + fileName);
+		kfs.delete("src/main/resources/" + fileName);
 		activeRules.remove(fileName);
 		inActiveRules.add(fileName);
 		// call rebuildKFS() after using this method
@@ -131,7 +142,7 @@ public class RuleEditor
 
 		for(String fileName : fileNames){
 			fis = new FileInputStream("src/main/resources/rules/" + fileName);
-			PrototypeDriver.kfs.write("src/main/resources/" + fileName, PrototypeDriver.ks.getResources().newInputStreamResource(fis));
+			kfs.write("src/main/resources/" + fileName, ks.getResources().newInputStreamResource(fis));
 			activeRules.add(fileName);
 		}
 		// call rebuildKFS() after using this method

@@ -13,8 +13,7 @@ public class Parser {
 	/**
 	 * Parse the CSV file and create a DataObject
 	 * 
-	 * @param fileName
-	 *            The filename to parse
+	 * @param fileName The filename to parse
 	 * @return the DataObject
 	 * @throws IOException
 	 */
@@ -42,9 +41,7 @@ public class Parser {
 
 	/**
 	 * Update the dataObject with new data
-	 * 
-	 * @param dataObj
-	 *            the DataObject to update
+	 * @param dataObj the DataObject to update
 	 * @throws IOException
 	 */
 	public boolean update(DataObject dataObj) throws IOException {
@@ -73,9 +70,7 @@ public class Parser {
 
 	/**
 	 * Create the DataObject
-	 * 
-	 * @param hm
-	 *            the hashmap for the DataoOject
+	 * @param hm the hashmap for the DataoOject
 	 * @return the dataObject
 	 */
 	public DataObject createObj(HashMap<String, String> hm) {

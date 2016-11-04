@@ -18,11 +18,21 @@ public class DataObject
 		this.params = parameters;
 	}
 	
+	/**
+	 * Returns the value that maps to the key
+	 * @param key the key for the value
+	 * @return the value
+	 */
 	public Object getField(String key)
 	{
 		return params.get(key);
 	}
 	
+	/**
+	 * Checks to see if the DataObject hashmap contains the field
+	 * @param key the key to the field
+	 * @return true if the hashmap contains the field
+	 */
 	public boolean hasField(String key)
 	{
 		 if(params.get(key)!=null)
@@ -31,6 +41,11 @@ public class DataObject
 					
 	}
 	
+	/**
+	 * Returns the value that maps to the key casted as an Integer
+	 * @param key the key for the value
+	 * @return the integer value
+	 */
 	public int getFieldInt(String key)
 	{
 		return Integer.parseInt(params.get(key));

@@ -17,7 +17,10 @@ import javax.swing.JTextArea;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-import driver.PrototypeDriver;
+import org.kie.api.KieServices;
+import org.kie.api.builder.KieFileSystem;
+
+import driver.Prototype;
 
 /**
  * This simple java text editor was taken from a YouTube tutorial video. All rights go to them.
@@ -28,8 +31,9 @@ public class RuleTextEditor extends JFrame
 {
 	private JTextArea textArea = new JTextArea(20, 60);
 	private JFileChooser fc = new JFileChooser("src//main//resources//rules");
+	private Prototype p;
 	
-	public RuleTextEditor()
+	public RuleTextEditor(Prototype P)
 	{
 		JScrollPane scrollPane = new JScrollPane(textArea, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
 		
@@ -49,10 +53,14 @@ public class RuleTextEditor extends JFrame
 		file.add(Exit);
 		setLocationRelativeTo(null);
 		pack();
-		setVisible(true);		
+		setVisible(true);	
+		p=P;
 	}
 	
 	//actions
+	/**
+	 * Open the file
+	 */
 	Action Open = new AbstractAction("Open File"){
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -64,6 +72,9 @@ public class RuleTextEditor extends JFrame
 		}
 	};
 	
+	/**
+	 * Save the file
+	 */
 	Action Save = new AbstractAction("Save File"){
 		@Override
 		public void actionPerformed(ActionEvent e){
@@ -71,15 +82,22 @@ public class RuleTextEditor extends JFrame
 		}
 	};
 	
+	/**
+	 * Exit the application
+	 */
 	Action Exit = new AbstractAction("Exit"){
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			//	
+			dispose();
 		}
 		
 	};
 	
 	//methods
+	/**
+	 * Menu command for opening a file
+	 * @param filename the filename to open
+	 */
 	public void openFile(String filename)
 	{
 		FileReader fr = null;
@@ -93,6 +111,9 @@ public class RuleTextEditor extends JFrame
 		}
 	}
 	
+	/**
+	 * Menu command for saving a file.
+	 */
 	public void saveFile(){
 		if(fc.showSaveDialog(null) == JFileChooser.APPROVE_OPTION){
 			FileWriter fw = null;
@@ -101,10 +122,10 @@ public class RuleTextEditor extends JFrame
 				textArea.write(fw);
 				fw.close();
 				
-				RuleEditor rEditor = new RuleEditor();
+				RuleEditor rEditor = new RuleEditor(p.getKfs(),p.getKs());
 				
 				rEditor.addRule(fc.getSelectedFile().getName()+".drl");
-				PrototypeDriver.rebuildKFS();
+				p.rebuildKFS();
 				
 			} catch (IOException e)
 			{

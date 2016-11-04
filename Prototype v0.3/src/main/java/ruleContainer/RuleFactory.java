@@ -56,9 +56,11 @@ public class RuleFactory
 
 		System.out.println("Please enter the package name");
 		ruleToBeWritten += "package " + scan.nextLine() + "\n\n";
+		//Have it be always 'package rules'
 
 		System.out.println("Please enter any objects you wish to import into the rule.");
 		System.out.println("Please enter 'done' when you are finished.");
+		//Auto add parser.DataObject
 
 		while(true)
 		{
