@@ -148,7 +148,8 @@ public class Prototype {
 		if (dataObjCol.Size() > 0) {
 				while(dataObjCol.Size()>0)
 				{
-				kSession = kBase.newKieSession();
+				//kSession = kBase.newKieSession();
+				kSession = kContainer.newKieSession("ksession-rules");
 
 				
 				kSession.insert(dataObjCol);
@@ -180,7 +181,8 @@ public class Prototype {
 	{
 		if (dataObjCol.Size() > 0) {
 				
-				kSession = kBase.newKieSession();
+				//kSession = kBase.newKieSession();
+				kSession = kContainer.newKieSession("ksession-rules");
 				
 				System.out.println();
 				DataObject d;
