@@ -1,0 +1,18 @@
+package rules
+
+import parser.DataObject;
+
+rule "Check Val 8 Field for 64"
+	when
+		dataObject : DataObject()
+		eval(dataObject.getField("val8").equals("64"))
+	then
+		 System.out.println("It worked 64!");
+end
+rule "Check Val 8 Field for 8"
+	when
+		dataObject : DataObject()
+		eval(dataObject.getField("val8").equals("8"))
+	then
+		System.out.println("It worked 8!");
+end
