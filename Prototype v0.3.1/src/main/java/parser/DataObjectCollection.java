@@ -53,7 +53,7 @@ public class DataObjectCollection {
 		return collection.put(key, dataObj);
 	}
 	
-	public int Size()
+	public int size()
 	{
 		return collection.size();
 	}

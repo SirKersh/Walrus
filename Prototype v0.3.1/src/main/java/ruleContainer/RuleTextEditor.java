@@ -17,9 +17,6 @@ import javax.swing.JTextArea;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-import org.kie.api.KieServices;
-import org.kie.api.builder.KieFileSystem;
-
 import driver.Prototype;
 
 /**
@@ -27,13 +24,13 @@ import driver.Prototype;
  * https://www.youtube.com/watch?v=UghqfpA2zy4
  *
  */
+@SuppressWarnings("serial")
 public class RuleTextEditor extends JFrame
 {
 	private JTextArea textArea = new JTextArea(20, 60);
 	private JFileChooser fc = new JFileChooser("src//main//resources//rules");
-	private Prototype p;
 	
-	public RuleTextEditor(Prototype P)
+	public RuleTextEditor()
 	{
 		JScrollPane scrollPane = new JScrollPane(textArea, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
 		
@@ -54,7 +51,6 @@ public class RuleTextEditor extends JFrame
 		setLocationRelativeTo(null);
 		pack();
 		setVisible(true);	
-		p=P;
 	}
 	
 	//actions
@@ -105,12 +101,7 @@ public class RuleTextEditor extends JFrame
 				fw = new FileWriter(fc.getSelectedFile().getAbsolutePath() + ".drl");
 				textArea.write(fw);
 				fw.close();
-				
-				RuleEditor rEditor = new RuleEditor(p.getKfs(),p.getKs());
-				
-				rEditor.addRule(fc.getSelectedFile().getName()+".drl");
-				p.rebuildKFS();
-				
+				KieManager.addRule(fc.getSelectedFile().getName()+".drl");			
 			} catch (IOException e)
 			{
 				e.printStackTrace();

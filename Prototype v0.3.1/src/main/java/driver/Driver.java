@@ -1,7 +1,8 @@
 package driver;
 
 import java.util.Scanner;
-import ruleContainer.RuleEditor;
+import ruleContainer.RuleManager;
+import ruleContainer.KieManager;
 import ruleContainer.RuleFactory;
 import ruleContainer.RuleTextEditor;
 
@@ -10,11 +11,10 @@ public class Driver {
 	public static void main(String[] args) {
 		Prototype x = new Prototype();
 		Scanner scanner = new Scanner(System.in);
-		RuleEditor ruleEditor = new RuleEditor(x.kfs,x.ks);
+		RuleManager rManager = new RuleManager();
 		try {
-			x.updateKie();
-			ruleEditor.loadAllRules();
-			x.rebuildKFS();
+			KieManager.loadAllRules();
+			
 			int option = 0;
 			System.out.println("Welcome to the Rules Engine Prototype.");
 			while (option != 9) {
@@ -39,7 +39,7 @@ public class Driver {
 						System.out.println("Please input a filename.");
 						String filename = scanner.nextLine();
 						RuleFactory rf = new RuleFactory(filename, "src/main/resources/rules", scanner);
-						x.createNewRules(rf,ruleEditor);
+						x.createNewRules(rf,rManager);
 					}
 					else
 						System.out.println("No Logfiles in the system.");
@@ -54,17 +54,16 @@ public class Driver {
 					x.updateAll();
 					break;
 				case 5:
-					System.out.println(ruleEditor.displayAllActiveRules());
+					System.out.println(rManager.displayAllActiveRules());
 					break;
 				case 6:
-					System.out.println(ruleEditor.displayAllInActiveRules());
+					System.out.println(rManager.displayAllInActiveRules());
 					break;
 				case 7:
-					ruleEditor.toggleRules(scanner);
-					x.rebuildKFS();
+					rManager.toggleRules(scanner);
 					break;
 				case 8:
-					new RuleTextEditor(x);
+					new RuleTextEditor();
 					break;
 				case 9:
 					System.out.println("End of Program");

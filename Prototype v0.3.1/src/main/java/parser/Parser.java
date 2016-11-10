@@ -7,6 +7,7 @@ import java.util.HashMap;
 
 public class Parser {
 	BufferedReader reader;
+	String filename = "";
 	//HashMap<String, String> hashMap = new HashMap<String, String>();
 	String headers[];
 
@@ -36,8 +37,14 @@ public class Parser {
 			hashMap.put(headers[i], data[i]);
 		}
 
+		this.filename = fileName.substring(0, fileName.length() - 4);
 		// return the DataObject
-		return createObj(hashMap);
+		return createObj(hashMap, filename);
+	}
+	
+	public String getName()
+	{
+		return filename;
 	}
 
 	/**
@@ -78,8 +85,8 @@ public class Parser {
 	 *            the hashmap for the DataoOject
 	 * @return the dataObject
 	 */
-	public DataObject createObj(HashMap<String, String> hm) {
-		DataObject dataObj = new DataObject(hm);
+	public DataObject createObj(HashMap<String, String> hm, String name) {
+		DataObject dataObj = new DataObject(hm, name, this);
 
 		return dataObj;
 	}

@@ -8,16 +8,32 @@ public class DataObject
 {	
 	//HashMap simulating parameters
 	private Map<String,String> params;
+	private String name;
+	private Parser parser;
 	
 	/**
 	 * Constructor for DataObject
 	 * @param parameters the parameters
 	 */
-	public DataObject(HashMap<String, String> parameters)
+	public DataObject(HashMap<String, String> parameters, String name, Parser parser)
 	{
 		this.params = parameters;
+		this.name = name;
+		this.parser = parser;
 	}
 	
+	public Parser getParser()
+	{
+		return parser;
+	}
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
 	public Object getField(String key)
 	{
 		return params.get(key);

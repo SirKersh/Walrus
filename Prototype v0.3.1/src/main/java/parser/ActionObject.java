@@ -6,9 +6,9 @@ public class ActionObject extends DataObject
 {
 	private String derived = "";
 
-	public ActionObject(HashMap<String, String> parameters, String derived) 
+	public ActionObject(HashMap<String, String> parameters, String derived, String name) 
 	{
-		super(parameters);
+		super(parameters, name, null);
 		this.derived = derived;
 	}
 

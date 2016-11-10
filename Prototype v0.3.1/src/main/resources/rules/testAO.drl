@@ -1,0 +1,16 @@
+package rules
+
+import parser.DataObject;
+import parser.DataObjectCollectionArrayList;
+
+rule "Extinguishing Method"
+	when
+		dataObjectCol : DataObjectCollectionArrayList()
+				 
+		dataObject : DataObject(name == "ExtinguishingMethod") from dataObjectCol.getCollection()
+		eval(dataObject != null && dataObject.hasField("FireExtinguishingMethod") && dataObject.getField("FireExtinguishingMethod").equals("Pool Use"))
+
+	then
+	
+		System.out.println("The pool was used to extinguish the fire!");
+end
