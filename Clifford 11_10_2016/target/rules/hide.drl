@@ -1,0 +1,13 @@
+package rules
+
+import parser.DataObject;
+import parser.DataObjectCollection;
+
+rule "HIDE"
+	when
+		dataObjectCol : DataObjectCollection()
+		dataObject : DataObject() from dataObjectCol.getObject("FireAlarmSystem") 
+		 eval(dataObject!=null&&dataObject.getFieldInt("Primary Power Supply")<50)
+	then
+		System.out.println("Power is low");
+end

@@ -1,0 +1,22 @@
+package rules
+
+import parser.DataObject;
+import parser.DataObjectCollection;
+import parser.ActionObject;
+import java.util.HashMap;
+
+rule "rule chaining"
+	when
+		dataObjectCol : DataObjectCollection()
+		dataObject : DataObject() from dataObjectCol.getObject("FireAlarmSystem")
+		 
+		eval(dataObject!=null&&dataObject.getFieldInt("Primary Power Supply")<50)
+	then
+	
+		System.out.println("Create ActionObject");
+		HashMap<String, String> hm = new HashMap<String,String>();
+		hm.put("testField", "testValue");
+		ActionObject ao = new ActionObject(hm, "FireAlarmSystem: Power Supply < 50");
+		dataObjectCol.addObject("Rule Chaining Test", ao);
+		System.out.println("ActionObject Created");	
+end
