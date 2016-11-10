@@ -1,13 +1,15 @@
 package rules
 
 import parser.DataObject;
+import parser.ActionObject;
 import parser.DataObjectCollectionArrayList;
 
 rule "Extinguishing Method"
+salience -1
 	when
 		dataObjectCol : DataObjectCollectionArrayList()
 				 
-		dataObject : DataObject(name == "ExtinguishingMethod") from dataObjectCol.getCollection()
+		dataObject : ActionObject(name == "ExtinguishingMethod") from dataObjectCol.getCollection()
 		eval(dataObject != null && dataObject.hasField("FireExtinguishingMethod") && dataObject.getField("FireExtinguishingMethod").equals("Pool Use"))
 
 	then
