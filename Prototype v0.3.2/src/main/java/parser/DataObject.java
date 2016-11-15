@@ -79,4 +79,9 @@ public class DataObject
 		
 		return printString;
 	}
+	
+	public Map<String, String> getMap()
+	{
+		return params;
+	}
 }

@@ -47,4 +47,14 @@ public class DataObjectCollectionArrayList {
 		return null;
 	}
 
+	public int howManyInCollection()
+	{
+		return collection.size();
+	}
+	
+	public DataObject getObjAtPosition(int i)
+	{
+		return collection.get(i);
+	}
+	
 }

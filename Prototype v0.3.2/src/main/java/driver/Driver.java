@@ -12,6 +12,7 @@ public class Driver {
 		Prototype x = new Prototype();
 		Scanner scanner = new Scanner(System.in);
 		RuleManager rManager = new RuleManager();
+		boolean didCallTwo = false;
 		try {
 			KieManager.loadAllRules();
 			
@@ -34,17 +35,18 @@ public class Driver {
 				option = Integer.parseInt(s);
 				switch (option) {
 				case 1:
-					if(x.checkForLogFile())
+					if(x.checkForLogFile() && didCallTwo)
 					{
 						System.out.println("Please input a filename.");
 						String filename = scanner.nextLine();
-						RuleFactory rf = new RuleFactory(filename, "src/main/resources/rules", scanner);
+						RuleFactory rf = new RuleFactory(filename, "src/main/resources/rules", scanner, x.getDataObjCol());
 						x.createNewRules(rf,rManager);
 					}
 					else
-						System.out.println("No Logfiles in the system.");
+						System.out.println("No Logfiles in the system. Please choose option 2 to load log files.");
 					break;
 				case 2:
+					didCallTwo = true;
 					x.importLogFile(scanner);
 					break;
 				case 3:

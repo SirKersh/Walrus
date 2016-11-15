@@ -6,6 +6,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
+import parser.DataObjectCollectionArrayList;
+
 /**
  * A RuleFactory creates a .drl file which could contain multiple rules.
  */
@@ -17,6 +19,7 @@ public class RuleFactory
 	private String ruleToBeWritten = "";
 	private RuleMaker rm;
 	private Scanner scan;
+	private DataObjectCollectionArrayList myList;
 
 	/**
 	 * Constructor for RuleFactory
@@ -37,6 +40,15 @@ public class RuleFactory
 		this.directoryName = directoryName;
 		scan = Scan;
 		rm = new RuleMaker(scan);
+	}
+	
+	public RuleFactory(String ruleName, String directoryName, Scanner Scan, DataObjectCollectionArrayList theList )
+	{
+		myList = theList;
+		this.ruleName = ruleName;
+		this.directoryName = directoryName;
+		scan = Scan;
+		rm = new RuleMaker(scan, theList);
 	}
 
 	/**

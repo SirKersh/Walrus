@@ -171,6 +171,11 @@ public class Prototype {
 	{
 		return (dataObjCol.size()>0);
 	}
+	
+	public DataObjectCollectionArrayList getDataObjCol()
+	{
+		return dataObjCol;
+	}
 
 
 }

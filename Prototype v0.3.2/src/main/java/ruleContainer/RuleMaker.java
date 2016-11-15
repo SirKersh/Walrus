@@ -2,6 +2,11 @@ package ruleContainer;
 
 import java.util.Scanner;
 
+import org.mvel2.sh.command.basic.Set;
+
+import parser.DataObject;
+import parser.DataObjectCollectionArrayList;
+
 /**
  * A RuleMaker creates the inside of a .drl file. Everything except package name and imports are done here.
  *
@@ -9,14 +14,21 @@ import java.util.Scanner;
 public class RuleMaker {
 
 	Scanner scan;
+	DataObjectCollectionArrayList theList;
 
 	/**
 	 * Constructor for RuleMaker
 	 * @param scan Scanner used for reading input
 	 */
-	public RuleMaker(Scanner scan){
-
+	public RuleMaker(Scanner scan)
+	{
 		this.scan = scan;
+	}
+	
+	public RuleMaker(Scanner scan, DataObjectCollectionArrayList myList)
+	{
+		this.scan = scan;
+		theList = myList;
 	}
 
 	/**
@@ -32,7 +44,15 @@ public class RuleMaker {
 		System.out.println("Please enter the rule name");
 		rule += "rule \"" + scan.nextLine() + "\"\n";
 		
-		System.out.println("Please enter logfile your rule will use.");
+		System.out.println("Please enter logfile your rule will use. Select from list below, and type exactly as appears.");
+		
+		int howManyToPrint = theList.howManyInCollection();
+		
+		for(int i = 0; i < howManyToPrint; i++)
+		{
+			System.out.println(theList.getObjAtPosition(i).getName());
+		}
+		
 		logfile = scan.nextLine();
 
 		System.out.println("Please enter all objects you wish to use in correct format");
@@ -53,7 +73,17 @@ public class RuleMaker {
 		}
 		rule += "\t\tdataObject : DataObject() from dataObjectCol.getObject(\""+logfile+"\") \n";
 
-		System.out.println("You're now going to enter the conditions to evaluate");
+		System.out.println("Now enter the conditions to evaluate. Select from the following list, type exactly as they appear.");
+		
+		for(int i = 0; i < howManyToPrint; i++)
+		{
+			DataObject theObject = theList.getObjAtPosition(i);
+			
+			for (String key : theObject.getMap().keySet() ) {
+			    System.out.println( key );
+			}
+		}
+		
 		System.out.println();
 		
 		while(true)
@@ -62,10 +92,10 @@ public class RuleMaker {
 			String object = "";
 			String op = "";
 			String cond = "";
-			System.out.println("Please enter the object you wish to evaluate.");
+			System.out.println("Please enter the object you wish to evaluate."); //@TO-DO
 			object = scan.nextLine();
 			
-			System.out.println("Please enter a field of the object to be evaluated.");
+			System.out.println("Please enter a field of the object to be evaluated."); //@TO-DO
 			feild = scan.nextLine();
 			
 			System.out.println("Please enter the number representing the operation you wish to use.");
