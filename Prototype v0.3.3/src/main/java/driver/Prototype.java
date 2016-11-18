@@ -120,7 +120,7 @@ public class Prototype {
 				
 				try {
 					Thread.sleep(1000);
-					System.out.println("\n\n");
+					System.out.println("\n");
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
