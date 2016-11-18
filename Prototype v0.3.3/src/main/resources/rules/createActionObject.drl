@@ -16,11 +16,11 @@ rule "action object creation"
 		eval(dataObject2 != null && dataObject2.hasField("Water_Levels") && dataObject2.getFieldInt("Water_Levels") >= 80)
 	then
 	
-		System.out.println("Create ActionObject");
+		//System.out.println("Create ActionObject");
 		HashMap<String, String> hm = new HashMap<String,String>();
 		hm.put("FireExtinguishingMethod", "Pool Use");
 		//action objects take in a HM, a derived string, and string name.
 		ActionObject dobj = new ActionObject(hm, "FAS: Current Temp, PL: Water Level", "ExtinguishingMethod");
 		dataObjectCol.add(dobj);
-		System.out.println("ActionObject Created");	
+		//System.out.println("ActionObject Created");	
 end
