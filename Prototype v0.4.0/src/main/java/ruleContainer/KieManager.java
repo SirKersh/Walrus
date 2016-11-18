@@ -86,11 +86,11 @@ public class KieManager {
 	 * @throws FileNotFoundException
 	 */
 	static public void loadAllRules() throws FileNotFoundException{
-		ArrayList<String> fileNames = listFilesForFolder(new File("src/main/resources/rules"));
+		ArrayList<String> fileNames = listFilesForFolder(new File("src/main/resources/massRuleFolder"));
 		FileInputStream fis;
 
 		for(String fileName : fileNames){
-			fis = new FileInputStream("src/main/resources/rules/" + fileName);
+			fis = new FileInputStream("src/main/resources/massRuleFolder/" + fileName);
 			kfs.write("src/main/resources/" + fileName, ks.getResources().newInputStreamResource(fis));
 			activeRules.add(fileName);
 		}

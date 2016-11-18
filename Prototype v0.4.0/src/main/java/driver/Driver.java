@@ -17,7 +17,11 @@ public class Driver {
 		boolean didCallTwo = false;
 	
 			try {
+				long start = System.currentTimeMillis();
 				KieManager.loadAllRules();
+				long end = System.currentTimeMillis();
+				System.out.println((end-start) + "ms");
+				System.out.println((end - start) / 1000 + "s");
 			} catch (FileNotFoundException e2) {
 				System.out.println("Unable to load drools files.");
 			}

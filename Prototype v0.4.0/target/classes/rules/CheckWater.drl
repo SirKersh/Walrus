@@ -1,0 +1,19 @@
+package rules
+
+import parser.DataObject;
+import parser.ActionObject;
+import parser.DataObjectCollectionArrayList;
+import java.util.HashMap;
+
+rule "waterCheck"
+	when
+		dataObjectCol : DataObjectCollectionArrayList()
+		dataObject1 : DataObject(name == "FireAlarmSystem") from dataObjectCol.getCollection() 
+		 eval(dataObject1 != null&&dataObject1.getField("Manual Fire Alarm Activation").equals("1"))
+	then
+		 System.out.println("Enough water to put out fire");
+		HashMap<String, String> hm2 = new HashMap<String,String>();
+		 hm2.put("temp", "0");
+		 ActionObject dobj = new ActionObject(hm2, "", "Waterstuff");
+		 dataObjectCol.add(dobj);
+end
