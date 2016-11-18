@@ -102,9 +102,8 @@ public class RuleTextEditor extends JFrame
 				textArea.write(fw);
 				fw.close();
 				KieManager.addRule(fc.getSelectedFile().getName()+".drl");			
-			} catch (IOException e)
-			{
-				e.printStackTrace();
+				//System.out.println("File has been successfully written.");
+			} catch (IOException e){
 			}
 		}
 	}

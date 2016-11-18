@@ -57,12 +57,20 @@ public class Prototype {
 	{
 		DataObject x;
 		HashMap<String, String> hm = new HashMap<String,String>();
+		int no = -1;
 		
 		System.out.println("Input a file name of the new Data.");
 		String name = scanner.nextLine();
-		
+		while(no == -1){
 		System.out.println("How many fields do you want?");
-		int no = Integer.parseInt(scanner.nextLine());
+	
+			try{
+				no = Integer.parseInt(scanner.nextLine());
+			} catch (NumberFormatException e){
+				System.out.println("Please enter a valid integer.");
+				no = -1;
+			}
+		}
 		for(int i = 0;i<no;i++)
 		{
 			System.out.println("Please name the field");

@@ -30,6 +30,7 @@ public class KieManager {
 		Results results = kieBuilder.getResults();
 		if (results.hasMessages(Message.Level.ERROR)) {
 			System.out.println(results.getMessages());
+			System.out.println("Check rule directory for indicated error(s).");
 			throw new IllegalStateException("### errors ###");
 		}
 		KieContainer kContainer = ks.newKieContainer(ks.getRepository().getDefaultReleaseId());
@@ -48,10 +49,12 @@ public class KieManager {
 	 * deprecated
 	 */
 	static public void addRule(String fileName) throws FileNotFoundException {
+		/*
 		if(activeRules.contains(fileName)){
 			System.out.println("There already exists a drl file with this name.");
 			return;
-		}
+		}*/
+		
 		FileInputStream fis;
 		fis = new FileInputStream("src/main/resources/rules/" + fileName);
 		kfs.write("src/main/resources/" + fileName, ks.getResources().newInputStreamResource(fis));
