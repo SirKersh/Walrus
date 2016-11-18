@@ -112,10 +112,19 @@ public class Prototype {
 		if (dataObjCol.size() > 0) {
 			while(dataObjCol.size()>0)
 			{
+				System.out.println("Fire Rules: ");
 				kSession = KieManager.kBase.newKieSession();
 				kSession.insert(dataObjCol);
 				kSession.fireAllRules();
 				kSession.dispose();
+				
+				try {
+					Thread.sleep(1000);
+					System.out.println("\n\n");
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				// Update the specific parser
 
 				///// TELL ME WHAT THIS IS SUPPOSED TO DO PLS CAUSE THIS IS VERY IMPORTANT

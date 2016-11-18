@@ -1,0 +1,12 @@
+/META-INF/
+/LogRuleExamples.drl
+/PoolRules.drl
+/RUN.drl
+/driver/
+/dtables/
+/parser/
+/ruleContainer/
+/rules/
+/rulestestRule.drl
+/rulestestRule1.drl
+/testRule1.drl
