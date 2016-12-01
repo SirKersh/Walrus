@@ -1,0 +1,19 @@
+package rules
+
+import parser.DataObject;
+import parser.ActionObject;
+
+
+rule "Test_Double_AO"
+
+	when
+		action1 : ActionObject()
+		action2: ActionObject()
+		
+		eval(action1 != null && action1.hasField("FireExtinguishingMethod") && action1.getField("FireExtinguishingMethod").equals("Pool Use")) && 
+		eval(action2 != null && action2.hasField("Water") && action2.getField("Water").equals("50"))
+
+	then
+	
+		System.out.println("AO1 & AO2: Two AO were chained together.");
+end
