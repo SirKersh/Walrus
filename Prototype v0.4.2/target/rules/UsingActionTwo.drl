@@ -1,0 +1,22 @@
+package rules
+
+import parser.DataObject;
+import parser.ActionObject;
+import parser.DataObjectCollectionArrayList;
+import driver.Prototype;
+
+
+rule "Water_Method"
+
+	when
+		dataObjectCol : DataObjectCollectionArrayList()
+		pro : Prototype()
+		action : ActionObject()
+				 
+		//dataObject : ActionObject(name == "ExtinguishingMethod") from dataObjectCol.getCollection()
+		eval(action != null && action.hasField("Water") && action.getField("Water").equals("50"))
+
+	then
+	
+		System.out.println("Water is good");
+end

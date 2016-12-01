@@ -1,0 +1,30 @@
+package rules
+
+import parser.DataObject;
+import parser.DataObjectCollectionArrayList;
+import parser.ActionObject;
+import java.util.HashMap;
+import driver.Prototype;
+import java.util.ArrayList;
+
+
+rule "Creating_Action_Object_2"
+	when
+		dataObjectCol : DataObjectCollectionArrayList()
+		pro : Prototype()		 
+				 
+		dataObject : DataObject(name == "FireAlarmSystem") from dataObjectCol.getCollection()
+		eval(dataObject != null && dataObject.hasField("Heat Detector") && dataObject.getField("Heat Detector").equals("0"))
+		
+		dataObject2 : DataObject(name == "PoolLog") from dataObjectCol.getCollection()
+		eval(dataObject2 != null && dataObject2.hasField("Water_Levels") && dataObject2.getFieldInt("Water_Levels") >= 80)
+	then
+	
+		//System.out.println("Create ActionObject");
+		HashMap<String, String> hm = new HashMap<String,String>();
+		hm.put("Water", "50");
+		//action objects take in a HM, a derived string, and string name.
+		ActionObject dobj = new ActionObject(hm, "FAS: Heat Detector, PL: Water Level", "Water");
+		pro.insertToKie(dobj);
+		System.out.println("Action Object Created");
+end
