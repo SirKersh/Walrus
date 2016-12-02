@@ -1,0 +1,16 @@
+package rules
+
+import parser.DataObject;
+import parser.ActionObject;
+
+rule "Water_Method"
+
+	when
+		action : ActionObject()
+
+		eval(action != null && action.hasField("Water") && action.getField("Water").equals("50"))
+
+	then
+	
+		System.out.println("AO2 Fired: Water is good");
+end

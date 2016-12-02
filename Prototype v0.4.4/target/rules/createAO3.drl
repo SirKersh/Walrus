@@ -1,0 +1,26 @@
+package rules
+
+import parser.DataObject;
+import parser.ActionObject;
+import parser.DataObjectCollectionArrayList;
+import java.util.HashMap;
+
+rule "Creating_AO_3"
+
+	when
+		dataObjectCol : DataObjectCollectionArrayList()
+		action : ActionObject();
+	 				 
+		eval(action != null && action.hasField("Action2") && action.getField("Action2").equals("1"))
+		
+		dataObject2 : DataObject(name == "ChainRulingExample") from dataObjectCol.getCollection()
+		eval(dataObject2 != null && dataObject2.hasField("Data5") && dataObject2.getField("Data5").equals("1"))
+
+	then
+		HashMap<String, String> hm = new HashMap<String,String>();
+		hm.put("Action3", "1");
+		//action objects take in a HM, a derived string, and string name.
+		ActionObject dobj = new ActionObject(hm, "", "Action3");
+		insert(dobj);
+		System.out.println("Action Object 3 Created");
+end

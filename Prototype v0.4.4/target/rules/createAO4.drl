@@ -1,0 +1,25 @@
+package rules
+
+import parser.DataObject;
+import parser.ActionObject;
+import java.util.HashMap;
+
+
+rule "Creating_AO_4"
+
+	when
+		action1 : ActionObject()
+		action2: ActionObject()
+		
+		eval(action1 != null && action1.hasField("Action1") && action1.getField("Action1").equals("1")) && 
+		eval(action2 != null && action2.hasField("Action2") && action2.getField("Action2").equals("1"))
+
+	then
+	
+		HashMap<String, String> hm = new HashMap<String,String>();
+		hm.put("Action4", "1");
+		//action objects take in a HM, a derived string, and string name.
+		ActionObject dobj = new ActionObject(hm, "", "Action4");
+		insert(dobj);
+		System.out.println("Action Object 4 Created");
+end
