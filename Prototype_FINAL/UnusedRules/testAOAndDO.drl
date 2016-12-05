@@ -1,0 +1,21 @@
+package rules
+
+import parser.DataObject;
+import parser.ActionObject;
+import parser.DataObjectCollection;
+
+rule "AO & DO Test"
+
+	when
+		dataObjectCol : DataObjectCollection()
+		action : ActionObject();
+
+		eval(action != null && action.hasField("FireExtinguishingMethod") && action.getField("FireExtinguishingMethod").equals("Pool Use"))
+		
+		dataObject2 : DataObject(name == "FireAlarmSystem") from dataObjectCol.getCollection()
+		eval(dataObject2 != null && dataObject2.hasField("Heat Detector") && dataObject2.getField("Heat Detector").equals("0"))
+
+	then
+		
+		System.out.println("DO and AO fired together: It Worked.");
+end

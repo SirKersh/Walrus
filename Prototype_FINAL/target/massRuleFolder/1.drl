@@ -1,0 +1,14 @@
+package rules
+
+import parser.DataObject;
+import parser.DataObjectCollection;
+
+rule "Pool Temp 1"
+	when
+		dataObjectCol : DataObjectCollection()
+		dataObject : DataObject(name == "PoolLog") from dataObjectCol.getCollection()
+		eval(dataObject != null && dataObject.hasField("Temperature") && dataObject.getFieldInt("Temperature") < 17)
+	then
+		//System.out.println("Water Too Cold!" + 17);
+
+end
