@@ -5,7 +5,6 @@ import parser.ActionObject;
 import parser.DataObjectCollectionArrayList;
 
 rule "Creating_AO_3"
-
 	when
 		dataObjectCol : DataObjectCollectionArrayList()
 		action : ActionObject();

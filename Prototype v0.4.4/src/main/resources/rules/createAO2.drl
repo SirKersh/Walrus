@@ -14,7 +14,6 @@ rule "Creating_AO_2"
 		dataObject2 : DataObject(name == "ChainRulingExample") from dataObjectCol.getCollection()
 		eval(dataObject2 != null && dataObject2.hasField("Data4") && dataObject2.getField("Data4").equals("1"))
 	then
-	
 		HashMap<String, String> hm = new HashMap<String,String>();
 		hm.put("Action2", "1");
 		//action objects take in a HM, a derived string, and string name.
