@@ -43,7 +43,8 @@ public class Prototype {
 		System.out.println("Please input the csv filename");
 		String csvFile = scanner.nextLine();
 
-		while (!(new File("Logs\\" + csvFile + ".csv").exists())&&!(csvFile.equals("EXIT"))) {
+		while (!(new File("Logs//" + csvFile + ".csv").exists()) && !(csvFile.equals("EXIT"))) 
+		{
 			System.out.println("No file found!");
 			System.out.println("Please input the csv filename or enter 'EXIT' to leave");
 			csvFile = scanner.nextLine();

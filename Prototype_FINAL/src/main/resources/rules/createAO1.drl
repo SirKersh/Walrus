@@ -7,7 +7,7 @@ import java.util.HashMap;
 
 rule "Creating_AO_1"
 	when
-		dataObjectCol : DataObjectCollection()		 	 
+		dataObjectCol : DataObjectCollection()	//good to here	 	 
 		dataObject : DataObject(name == "ChainRulingExample") from dataObjectCol.getCollection()
 		eval(dataObject != null && dataObject.hasField("Data1") && dataObject.getField("Data1").equals("1"))
 		

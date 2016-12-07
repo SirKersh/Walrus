@@ -15,4 +15,5 @@ rule "Check Val 8 Field for 8"
 		eval(dataObject.getField("val8").equals("8"))
 	then
 		System.out.println("It worked 8!");
+		
 end

@@ -14,12 +14,18 @@ public class Driver {
 		Prototype x = new Prototype();
 		Scanner scanner = new Scanner(System.in);
 		RuleManager rManager = new RuleManager();
+<<<<<<< Updated upstream
 		
 			try {
 				KieManager.loadAllRules();
 			} catch (FileNotFoundException e) {
 				System.out.println("Unable to load drools files.");
 			}
+=======
+		boolean didCallTwo = false;
+		try {
+			KieManager.loadAllRules();
+>>>>>>> Stashed changes
 			
 			int option = 0;
 			System.out.println("Welcome to the Rules Engine Prototype.");
@@ -44,22 +50,27 @@ public class Driver {
 				}
 				switch (option) {
 				case 1:
-					if(x.checkForLogFile())
+					if(x.checkForLogFile() && didCallTwo)
 					{
 						System.out.println("Please input a filename.");
 						String filename = scanner.nextLine();
-						RuleFactory rf = new RuleFactory(filename, "src/main/resources/rules", scanner);
+						RuleFactory rf = new RuleFactory(filename, "src/main/resources/rules", scanner, x.getDataObjCol());
 						x.createNewRules(rf,rManager);
 					}
 					else
-						System.out.println("No Logfiles in the system.");
+						System.out.println("No Logfiles in the system. Please choose option 2 to load log files.");
 					break;
 				case 2:
+<<<<<<< Updated upstream
 					try {
 						x.importLogFile(scanner);
 					} catch (IOException e) {
 						System.out.println("Unable to locate LogFile.");
 					}
+=======
+					didCallTwo = true;
+					x.importLogFile(scanner);
+>>>>>>> Stashed changes
 					break;
 				case 3:
 					try {

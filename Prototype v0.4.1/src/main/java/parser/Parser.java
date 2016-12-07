@@ -22,7 +22,7 @@ public class Parser {
 	public DataObject parse(String fileName) throws IOException {
 		HashMap<String, String> hashMap = new HashMap<String, String>();
 		// read in the CSV file.
-		reader = new BufferedReader(new FileReader("Logs\\" + fileName));
+		reader = new BufferedReader(new FileReader("Logs//" + fileName));
 
 		// save the headers to a global array so it can be used throughout the
 		// program

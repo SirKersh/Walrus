@@ -23,4 +23,5 @@ rule "action object creation"
 		ActionObject dobj = new ActionObject(hm, "FAS: Current Temp, PL: Water Level", "ExtinguishingMethod");
 		dataObjectCol.add(dobj);
 		System.out.println("ActionObject Created");	
+		update(dobj);
 end

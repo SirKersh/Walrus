@@ -1,5 +1,10 @@
+<<<<<<< Updated upstream
 /META-INF/
 /LogRuleExamples.drl
+=======
+/LogRuleExamples.drl
+/META-INF/
+>>>>>>> Stashed changes
 /PoolRules.drl
 /RUN.drl
 /driver/

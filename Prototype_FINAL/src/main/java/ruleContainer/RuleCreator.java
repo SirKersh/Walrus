@@ -15,8 +15,8 @@ import parser.DataObjectCollection;
  * @author Walrus
  *
  */
-public class RuleCreator {
-
+public class RuleCreator 
+{
 	private String ruleName;
 	String directoryName;
 	private BufferedWriter writer;
@@ -71,7 +71,8 @@ public class RuleCreator {
 	 * 
 	 * @throws IOException
 	 */
-	public String createRule() throws IOException {
+	public String createRule() throws IOException 
+	{
 		String temp = "";
 		int counter = 0;
 
@@ -90,10 +91,11 @@ public class RuleCreator {
 		// Auto add parser.DataObject and parser.DataObjectCollection
 		ruleToBeWritten += "import parser.DataObject;\n";
 		ruleToBeWritten += "import parser.ActionObject;\n";
-		ruleToBeWritten += "import parser.DataObjectCollectionArrayList;\n";
+		ruleToBeWritten += "import parser.DataObjectCollection;\n";
 		ruleToBeWritten += "import java.util.HashMap;\n";
 
-		while (true) {
+		while (true)
+		{
 			temp = scan.nextLine();
 			if (temp.equals("done"))
 				break;
@@ -103,24 +105,31 @@ public class RuleCreator {
 
 		ruleToBeWritten += "\n";
 
-		while (true) {
-			if (counter > 0) {
+		while (true)
+		{
+			if (counter > 0) 
+			{
 				System.out.println("Please enter stop to quit or press enter to make another rule");
 				temp = scan.nextLine();
 				if (temp.equals("stop"))
 					break;
-				else {
+				else
+				{
 					ruleToBeWritten += createInnerRule();
 					counter++;
 				}
-			} else {
+			} 
+			else 
+			{
 				ruleToBeWritten += createInnerRule();
 				counter++;
 			}
 
 		}
 
+		System.out.println("Ok it is getting here");
 		writer.write(ruleToBeWritten);
+		System.out.println("Ok it is also getting here");
 		writer.flush();
 		return ruleName + ".drl";
 	}
@@ -142,26 +151,30 @@ public class RuleCreator {
 		int no = 1;
 
 		System.out.println("Please enter the rule name");
-		rule += "rule \"" + scan.nextLine() + "\"\n";
+		rule += "rule \"" + scan.nextLine() + "\"\n"; //good
 		
 		System.out.println("Is your rule going to use new data? (y/n)");
 		if(scan.nextLine().equals("y"))
+		{
 			rule += "salience -1\n";
+		}
 		
 		rule += "\twhen\n";
-		rule += "\t\tdataObjectCol : DataObjectCollectionArrayList()\n";
+		rule += "\t\tdataObjectCol : DataObjectCollection()\n";
 
 		while (true) {
 			System.out.println("Would you like to use data from: \n1. Logfiles \n2. new Data");
 			int choice = Integer.parseInt(scan.nextLine());
-			if(choice==2&&newData.size()==0){
+			if(choice==2&&newData.size()==0)
+			{
 				System.out.println("No new Data in the system. Automatically choosing option 1.");
 				choice = 1;
 			}
-			else if(choice==1&&list.size()==0){
+			else if(choice==1&&list.size()==0)
+			{
 				System.out.println("No logfiles in the system. Automatically choosing option 2.");
 				choice = 2;
-			}
+			} //good
 			switch(choice)
 			{
 				case 1:
@@ -170,12 +183,14 @@ public class RuleCreator {
 
 					int howManyToPrint = list.size();
 
-					for (int i = 0; i < howManyToPrint; i++) {
+					for (int i = 0; i < howManyToPrint; i++) 
+					{
 						System.out.println(list.getObjAtPosition(i).getName());
 					}
 					type = "DataObject";
 					isAction = false;
 					break;
+					
 				case 2:
 					System.out.println(
 							"Please enter the data your rule will use. Select from list below, and type exactly as appears.");
@@ -188,6 +203,7 @@ public class RuleCreator {
 					type = "ActionObject";
 					isAction = true;
 					break;
+					
 				default:
 					break;
 			}
@@ -305,6 +321,7 @@ public class RuleCreator {
 				
 				rule += "\t\t ActionObject dobj = new ActionObject(hm"+hmNo+", \"\", \""+logfile+"\");\n";
 				rule += "\t\t dataObjectCol.add(dobj);\n";
+				rule += "\t\t System.out.println(\"Action Object Created.\");\n";
 				
 				break;
 			}

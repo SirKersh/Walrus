@@ -1,0 +1,28 @@
+package rules
+
+import parser.DataObject;
+import parser.ActionObject;
+import parser.DataObjectCollectionArrayList;
+import java.util.HashMap;
+
+rule "liveTestRule1"
+salience -1
+	when
+		dataObjectCol : DataObjectCollectionArrayList()
+		dataObject1 : DataObject(name == "FireAlarmSystem") from dataObjectCol.getCollection() 
+		 eval(dataObject1 != null&&dataObject1.getField("Smoke Detector").equals("1"))
+	then
+		HashMap<String, String> hm1 = new HashMap<String,String>();
+		 hm1.put("canUse", "true");
+		 ActionObject dobj = new ActionObject(hm1, "", "liveTestData");
+		 dataObjectCol.add(dobj);
+end
+rule "liveTestRule2"
+salience -1
+	when
+		dataObjectCol : DataObjectCollectionArrayList()
+		dataObject1 : ActionObject(name == "liveTestData") from dataObjectCol.getCollection() 
+		 eval(dataObject1 != null&&dataObject1.getField("canUse").equals("true"))
+	then
+		 System.out.println("Use This Tank");
+end
