@@ -222,8 +222,9 @@ public class RuleCreator
 				else
 					rule += "\t\t" + temp + "\n";
 			}
-			System.out.println("Please enter the object you wish to evaluate. Use \"dataObject\" as default."); // @TO-DO
+			System.out.println("Please enter the object you wish to evaluate. Use \"actionObject\" as default."); // @TO-DO
 			object = scan.nextLine() + no;
+			rule += "\t\t"+object + ": ActionObject();"; //added this part right here
 			
 			rule += "\t\t"+object+" : "+type+"(name == \"" + logfile + "\") from dataObjectCol.getCollection() \n";
 
@@ -268,7 +269,7 @@ public class RuleCreator
 			cond = scan.nextLine();
 
 			if (isNumber)
-				rule += "\t\t eval("+object+" != null&&" + object + ".getFieldInt(\"" + feild + "\")" + op + "" + cond
+				rule += "\t\t eval("+object +" != null&&" + object + ".getFieldInt(\"" + feild + "\")" + op + "" + cond
 						+ ")\n";
 			else
 				rule += "\t\t eval("+object+" != null&&" + object + ".getField(\"" + feild + "\")" + op + "(\"" + cond

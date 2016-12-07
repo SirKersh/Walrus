@@ -7,9 +7,9 @@ import parser.DataObjectCollection;
 rule "Creating_AO_3"
 	when
 		dataObjectCol : DataObjectCollection()
-		action : ActionObject();
+		action : ActionObject(); //fixTHIS
 	 				 
-		eval(action != null && action.hasField("Action2") && action.getField("Action2").equals("1"))
+		eval(action != null && action.hasField("Action2") && action.getField("Action2").equals("1")) //fixTHIS
 		
 		dataObject2 : DataObject(name == "ChainRulingExample") from dataObjectCol.getCollection()
 		eval(dataObject2 != null && dataObject2.hasField("Data5") && dataObject2.getField("Data5").equals("1"))
