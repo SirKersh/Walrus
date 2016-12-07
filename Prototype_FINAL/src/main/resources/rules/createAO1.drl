@@ -16,7 +16,7 @@ rule "Creating_AO_1"
 	then
 	
 		HashMap<String, String> hm = new HashMap<String,String>();
-		hm.put("Action1", "1");
+		hm.put("Action1", "1"); //ok
 		//action objects take in a HM, a derived string, and string name.
 		ActionObject dobj = new ActionObject(hm, "", "Action1");
 		insert(dobj);

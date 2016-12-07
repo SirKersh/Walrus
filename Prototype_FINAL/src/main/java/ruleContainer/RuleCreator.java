@@ -127,9 +127,9 @@ public class RuleCreator
 
 		}
 
-		System.out.println("Ok it is getting here");
+		//System.out.println("Ok it is getting here");
 		writer.write(ruleToBeWritten);
-		System.out.println("Ok it is also getting here");
+		//System.out.println("Ok it is also getting here");
 		writer.flush();
 		return ruleName + ".drl";
 	}
@@ -299,18 +299,23 @@ public class RuleCreator
 				temp = scan.nextLine();
 				rule += "\t\t System.out.println(\"" + temp + "\");\n";
 				break;
+				
+				
+				
 			case 2:
 				rule += "\t\tHashMap<String, String> hm"+hmNo+" = new HashMap<String,String>();\n";
 				System.out.println("Please enter the data your rule will create. Select from list below, and type exactly as appears.");
 				int size = newData.size();
-				for (int i = 0; i < size; i++) {
+				for (int i = 0; i < size; i++) 
+				{
 					System.out.println(newData.getObjAtPosition(i).getName());
 				}
 				logfile = scan.nextLine();
 				
 				System.out.println("Please enter the field your rule will create. Select from list below, and type exactly as appears.");		
 				DataObject theObject = newData.getObject(logfile);
-				for (String key : theObject.getMap().keySet()) {
+				for (String key : theObject.getMap().keySet()) 
+				{
 					System.out.println(key);
 				}
 				feild = scan.nextLine();
@@ -321,10 +326,13 @@ public class RuleCreator
 				
 				rule += "\t\t ActionObject dobj = new ActionObject(hm"+hmNo+", \"\", \""+logfile+"\");\n";
 				rule += "\t\t dataObjectCol.add(dobj);\n";
+				rule += "\t\t insert(dobj);\n";
 				rule += "\t\t System.out.println(\"Action Object Created.\");\n";
 				
 				break;
 			}
+			
+			
 			hmNo++;
 			System.out.println("Type \"done\" if you are finished with the actions.");
 			temp = scan.nextLine();
