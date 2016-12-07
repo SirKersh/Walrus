@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
 import ruleContainer.RuleManager;
+import ruleContainer.KieManager;
 import ruleContainer.RuleCreator;
 import ruleContainer.RuleTextEditor;
 
@@ -23,6 +24,12 @@ public class Driver {
 		Scanner scanner = new Scanner(System.in);
 		RuleManager rManager = new RuleManager();
 
+		try {
+			KieManager.loadAllRules();
+		} catch (FileNotFoundException e2) {
+			System.out.println("Unable to load drools files");
+		}
+		
 		int option = 0;
 		System.out.println("Welcome to the Rules Engine Prototype.");
 		//Prompts the user via the menu for an action
