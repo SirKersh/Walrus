@@ -155,6 +155,7 @@ public class Driver {
 			 */
 			case 11:
 				System.out.println("End of Program");
+				System.exit(0);
 				break;
 			default:
 				System.out.println("Invalid Input.");
