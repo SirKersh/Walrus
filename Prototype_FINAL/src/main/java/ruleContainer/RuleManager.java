@@ -16,7 +16,7 @@ public class RuleManager
 	 * @return all active rules
 	 */
 	public String displayAllActiveRules(){
-		String temp = "There are all the active rules: \n";
+		String temp = "These are all the active rules: \n";
 		for(String s: KieManager.activeRules){
 			temp += s + "\n";
 		}
@@ -40,7 +40,7 @@ public class RuleManager
 	 * @return all inactive rules
 	 */
 	public String displayAllInActiveRules(){
-		String temp = "There are all the inactive rules: \n";
+		String temp = "These are all the inactive rules: \n";
 		for(String s: KieManager.inActiveRules){
 			temp += s + "\n";
 		}
@@ -75,11 +75,17 @@ public class RuleManager
 		System.out.println("Please enter the rule name(s) you wish to toggle on, 1 per line, and enter done when finished.");
 		while(true)
 		{
-			temp = scan.nextLine();
-			if(temp.equals("done"))
-				break;
-			else
-				KieManager.addRule(temp + ".drl");
+			try { 
+				temp = scan.nextLine();
+				if(temp.equals("done"))
+					break;
+				else
+					KieManager.addRule(temp + ".drl");
+			}
+			catch(FileNotFoundException e){
+				System.out.println("Rule not found, try again please.");
+			}
+			
 		}
 	}
 }
