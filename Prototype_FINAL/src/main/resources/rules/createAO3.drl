@@ -3,6 +3,7 @@ package rules
 import parser.DataObject;
 import parser.ActionObject;
 import parser.DataObjectCollection;
+import java.util.HashMap;
 
 rule "Creating_AO_3"
 	when
