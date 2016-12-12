@@ -133,12 +133,13 @@ public class RuleCreator
 		writer.flush();
 		return ruleName + ".drl";
 	}
-	
+
 	/**
 	 * CreateInnerRule creates the rule taking in name, conditions, and actions
 	 * @return the partially created rule that will be combined with the rest of the rule
 	 */
-	public String createInnerRule() {
+	public String createInnerRule() 
+	{
 		String rule = "";
 		String temp = "";
 		String logfile = "";
@@ -149,16 +150,17 @@ public class RuleCreator
 		String type = "";
 		boolean isAction = false;
 		int no = 1;
+		boolean additionalCondition = false; //mod4b
 
 		System.out.println("Please enter the rule name");
 		rule += "rule \"" + scan.nextLine() + "\"\n"; //good
-		
+
 		System.out.println("Is your rule going to use new data? (y/n)");
 		if(scan.nextLine().equals("y"))
 		{
 			rule += "salience -1\n";
 		}
-		
+
 		rule += "\twhen\n";
 		rule += "\t\tdataObjectCol : DataObjectCollection()\n";
 
@@ -177,71 +179,77 @@ public class RuleCreator
 			} //good
 			switch(choice)
 			{
-				case 1:
-					System.out.println(
-							"Please enter logfile your rule will use. Select from list below, and type exactly as appears.");
+			case 1:
+				System.out.println(
+						"Please enter logfile your rule will use. Select from list below, and type exactly as appears.");
 
-					int howManyToPrint = list.size();
+				int howManyToPrint = list.size();
 
-					for (int i = 0; i < howManyToPrint; i++) 
-					{
-						System.out.println(list.getObjAtPosition(i).getName());
-					}
-					type = "DataObject";
-					isAction = false;
-					break;
-					
-				case 2:
-					System.out.println(
-							"Please enter the data your rule will use. Select from list below, and type exactly as appears.");
+				for (int i = 0; i < howManyToPrint; i++) 
+				{
+					System.out.println(list.getObjAtPosition(i).getName());
+				}
+				type = "DataObject";
+				isAction = false;
+				break;
 
-					int size = newData.size();
+			case 2:
+				System.out.println(
+						"Please enter the data your rule will use. Select from list below, and type exactly as appears.");
 
-					for (int i = 0; i < size; i++) {
-						System.out.println(newData.getObjAtPosition(i).getName());
-					}
-					type = "ActionObject";
-					isAction = true;
-					break;
-					
-				default:
-					break;
+				int size = newData.size();
+
+				for (int i = 0; i < size; i++) 
+				{
+					System.out.println(newData.getObjAtPosition(i).getName());
+				}
+				type = "ActionObject";
+				isAction = true;
+				break;
+
+			default:
+				break;
 			}
-			
-			
+
+
 			logfile = scan.nextLine();
 
-			System.out.println("Please enter all objects you wish to use in correct format");
-			System.out.println("Format: Name : ClassName()");
-			System.out.println("Please enter 'done' when you are finished.");
+			if(additionalCondition == false) //mod4b
+			{ //mod4b
+				System.out.println("Please enter all objects you wish to use in correct format");
+				System.out.println("Follow this format (after ->)->Name : ClassName()");
+				System.out.println("Please enter 'done' when you are finished.");
 
-			while (true) {
-				temp = scan.nextLine();
-				if (temp.equals("done"))
-					break;
-				else
-					rule += "\t\t" + temp + "\n";
-			}
-			System.out.println("Please enter the object you wish to evaluate. Use \"actionObject\" as default."); // @TO-DO
-			object = scan.nextLine() + no;
-			rule += "\t\t"+object + ": ActionObject();"; //added this part right here
-			
+				while (true) 
+				{
+					temp = scan.nextLine();
+					if (temp.equals("done"))
+						break;
+					else
+						rule += "\t\t" + temp + "\n";
+				}
+			} //mod4b
+			System.out.println("Please enter the name of the object you wish to evaluate (you previously entered names, match exactly)."); // @TO-DO
+			object = scan.nextLine(); //mod4b used to be after scan.nextLine(): + no
+			//rule += "\t\t"+object + ": ActionObject(); \n"; 
+
 			rule += "\t\t"+object+" : "+type+"(name == \"" + logfile + "\") from dataObjectCol.getCollection() \n";
 
 			System.out.println();
-			
+
 			System.out.println(
 					"Please enter a field of the object to be evaluated. Select from the following list, type exactly as they appear.");
-			
+
 			DataObject theObject;
 			if(isAction)
 				theObject = newData.getObject(logfile);
 			else
 				theObject = list.getObject(logfile);
-			
 
-			
-			for (String key : theObject.getMap().keySet()) {
+
+
+			for (String key : theObject.getMap().keySet()) 
+			{
 				System.out.println(key);
 			}
 			feild = scan.nextLine();
@@ -251,7 +259,8 @@ public class RuleCreator
 			temp = scan.nextLine();
 
 			boolean isNumber = false;
-			switch (Integer.parseInt(temp)) {
+			switch (Integer.parseInt(temp)) 
+			{
 			case 1:
 				op = ".equals";
 				break;
@@ -270,16 +279,19 @@ public class RuleCreator
 
 			if (isNumber)
 				rule += "\t\t eval("+object +" != null&&" + object + ".getFieldInt(\"" + feild + "\")" + op + "" + cond
-						+ ")\n";
+				+ ")\n";
 			else
 				rule += "\t\t eval("+object+" != null&&" + object + ".getField(\"" + feild + "\")" + op + "(\"" + cond
-						+ "\"))\n";
+				+ "\"))\n";
 
 			System.out.println("Enter 'done' if finished or press enter to create another condition.");
 			temp = scan.nextLine();
 			no++;
 			if (temp.equals("done"))
+			{
 				break;
+			}
+			additionalCondition = true;//mod4b
 		}
 
 		System.out.println("Now you will input the actions you wish to perform");
@@ -300,9 +312,9 @@ public class RuleCreator
 				temp = scan.nextLine();
 				rule += "\t\t System.out.println(\"" + temp + "\");\n";
 				break;
-				
-				
-				
+
+
+
 			case 2:
 				rule += "\t\tHashMap<String, String> hm"+hmNo+" = new HashMap<String,String>();\n";
 				System.out.println("Please enter the data your rule will create. Select from list below, and type exactly as appears.");
@@ -312,7 +324,7 @@ public class RuleCreator
 					System.out.println(newData.getObjAtPosition(i).getName());
 				}
 				logfile = scan.nextLine();
-				
+
 				System.out.println("Please enter the field your rule will create. Select from list below, and type exactly as appears.");		
 				DataObject theObject = newData.getObject(logfile);
 				for (String key : theObject.getMap().keySet()) 
@@ -322,18 +334,18 @@ public class RuleCreator
 				feild = scan.nextLine();
 				System.out.println("Please enter the current value of the feild you just selected.");		
 				String value = scan.nextLine();
-				
+
 				rule += "\t\t hm"+hmNo+".put(\""  +feild+  "\", \""+value+"\");\n";
-				
+
 				rule += "\t\t ActionObject dobj = new ActionObject(hm"+hmNo+", \"\", \""+logfile+"\");\n";
-				rule += "\t\t dataObjectCol.add(dobj);\n";
+				//rule += "\t\t dataObjectCol.add(dobj);\n";
 				rule += "\t\t insert(dobj);\n";
 				rule += "\t\t System.out.println(\"Action Object Created.\");\n";
-				
+
 				break;
 			}
-			
-			
+
+
 			hmNo++;
 			System.out.println("Type \"done\" if you are finished with the actions.");
 			temp = scan.nextLine();

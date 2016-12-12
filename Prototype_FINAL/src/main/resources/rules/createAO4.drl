@@ -11,7 +11,7 @@ rule "Creating_AO_4"
 		action1 : ActionObject()
 		action2: ActionObject()
 		
-		eval(action1 != null && action1.hasField("Action1") && action1.getField("Action1").equals("1")) && 
+		eval(action1 != null && action1.hasField("Action1") && action1.getField("Action1").equals("1")) &&
 		eval(action2 != null && action2.hasField("Action2") && action2.getField("Action2").equals("1"))
 
 	then
