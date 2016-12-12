@@ -243,8 +243,7 @@ public class RuleCreator
 				letsPrintThis += " : ";
 				//System.out.println("Please enter the class of the object named: " + object + ". CaSe SeNsItIvE!");
 				System.out.println("the class of the object: " + object + " is being assigned ActionObject");
-				letsPrintThis += "ActionObject";
-				letsPrintThis += "()";
+				letsPrintThis += "ActionObject()";
 				rule += "\t\t" + letsPrintThis + "\n";
 			}
 
