@@ -1,0 +1,18 @@
+package rules
+
+import parser.DataObject;
+import parser.ActionObject;
+import parser.DataObjectCollection;
+import java.util.HashMap;
+
+rule "rule1Test"
+salience -1
+	when
+		dataObjectCol : DataObjectCollection()
+		myObject : ActionObject()
+		 eval(myObject != null&&myObject.getField("Location").equals("7"))
+		hey3 : DataObject(name == "PoolLog") from dataObjectCol.getCollection() 
+		 eval(hey3 != null&&hey3.getFieldInt("Temperature")>56)
+	then
+		 System.out.println("heyThereSexy");
+end
