@@ -1,0 +1,15 @@
+package rules
+
+import parser.DataObject;
+import parser.ActionObject;
+import parser.DataObjectCollection;
+import java.util.HashMap;
+
+rule "coolRuleYouFool"
+salience -1
+	when
+		dataObjectCol : DataObjectCollection()
+		 eval(test2 != null&&test2.getFieldInt("Size")>21)
+	then
+		 System.out.println("yes");
+end
