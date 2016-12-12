@@ -214,26 +214,38 @@ public class RuleCreator
 
 			logfile = scan.nextLine();
 
-			if(additionalCondition == false) //mod4b
-			{ //mod4b
-				System.out.println("Please enter all objects you wish to use in correct format");
-				System.out.println("Follow this format (after ->)->Name : ClassName()");
-				System.out.println("Please enter 'done' when you are finished.");
-
-				while (true) 
-				{
-					temp = scan.nextLine();
-					if (temp.equals("done"))
-						break;
-					else
-						rule += "\t\t" + temp + "\n";
-				}
-			} //mod4b
-			System.out.println("Please enter the name of the object you wish to evaluate (you previously entered names, match exactly)."); // @TO-DO
+//			if(additionalCondition == false) //mod4b
+//			{ //mod4b
+//				System.out.println("Please enter all objects you wish to use in correct format");
+//				System.out.println("Follow this format (after ->)->Name : ClassName()");
+//				System.out.println("Please enter 'done' when you are finished.");
+//
+//				while (true) 
+//				{
+//					temp = scan.nextLine();
+//					if (temp.equals("done"))
+//						break;
+//					else
+//						rule += "\t\t" + temp + "\n";
+//				}
+//			} //mod4b
+			System.out.println("Please enter the name of the object you wish to evaluate."); // @TO-DO
 			object = scan.nextLine(); //mod4b used to be after scan.nextLine(): + no
 			//rule += "\t\t"+object + ": ActionObject(); \n"; 
 
-			rule += "\t\t"+object+" : "+type+"(name == \"" + logfile + "\") from dataObjectCol.getCollection() \n";
+			if(choice == 1)
+			{
+				rule += "\t\t"+object+" : "+type+"(name == \"" + logfile + "\") from dataObjectCol.getCollection() \n";
+			}
+			else
+			{
+				String letsPrintThis = object;
+				letsPrintThis += " : ";
+				//System.out.println("Please enter the class of the object named: " + object + ". CaSe SeNsItIvE!");
+				System.out.println("the class of the object: " + object + "is being assigned ActionObject");
+				letsPrintThis += "ActionObject";
+				letsPrintThis += scan.nextLine() + "()";
+			}
 
 			System.out.println();
 
