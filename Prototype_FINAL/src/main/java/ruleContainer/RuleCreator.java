@@ -148,6 +148,7 @@ public class RuleCreator
 		String op = "";
 		String cond = "";
 		String type = "";
+		String newObjectSelectionString = "";
 		boolean isAction = false;
 		int no = 1;
 		boolean additionalCondition = false; //mod4b
@@ -213,39 +214,57 @@ public class RuleCreator
 
 
 			logfile = scan.nextLine();
+			
+			if(additionalCondition == true) //mod5c
+			{
+				System.out.println("You have chosen to enter an additional condition."); // mod5c
+				System.out.println("Would you like to use the same object as last time? (y/n)"); // mod5c
+				newObjectSelectionString = scan.nextLine();// mod5c
+			}
+			if(additionalCondition == false || newObjectSelectionString.equals("n")) //mod5c
+			{
+				System.out.println("Please enter the name of the object you wish to evaluate."); // @TO-DO
+				object = scan.nextLine(); //mod4b used to be after scan.nextLine(): + no
+				//rule += "\t\t"+object + ": ActionObject(); \n"; 
 
-//			if(additionalCondition == false) //mod4b
-//			{ //mod4b
-//				System.out.println("Please enter all objects you wish to use in correct format");
-//				System.out.println("Follow this format (after ->)->Name : ClassName()");
-//				System.out.println("Please enter 'done' when you are finished.");
+				if(choice == 1)
+				{
+					rule += "\t\t"+ object+" : "+type+"(name == \"" + logfile + "\") from dataObjectCol.getCollection() \n";
+				}
+				else
+				{
+					String letsPrintThis = object;
+					letsPrintThis += " : ";
+					//System.out.println("Please enter the class of the object named: " + object + ". CaSe SeNsItIvE!");
+					System.out.println("the class of the object: " + object + " is being assigned ActionObject");
+					letsPrintThis += "ActionObject()";
+					rule += "\t\t" + letsPrintThis + "\n";
+				}
+			}
+			else if(additionalCondition == true && newObjectSelectionString.equals("y")) //mod5c
+			{
+				// do the normal stuff but don't create the extra object
+			}
+			
+			//comment below back in to restore old functionality
+//			System.out.println("Please enter the name of the object you wish to evaluate."); // @TO-DO
+//			object = scan.nextLine(); //mod4b used to be after scan.nextLine(): + no
+//			//rule += "\t\t"+object + ": ActionObject(); \n"; 
 //
-//				while (true) 
-//				{
-//					temp = scan.nextLine();
-//					if (temp.equals("done"))
-//						break;
-//					else
-//						rule += "\t\t" + temp + "\n";
-//				}
-//			} //mod4b
-			System.out.println("Please enter the name of the object you wish to evaluate."); // @TO-DO
-			object = scan.nextLine(); //mod4b used to be after scan.nextLine(): + no
-			//rule += "\t\t"+object + ": ActionObject(); \n"; 
-
-			if(choice == 1)
-			{
-				rule += "\t\t"+object+" : "+type+"(name == \"" + logfile + "\") from dataObjectCol.getCollection() \n";
-			}
-			else
-			{
-				String letsPrintThis = object;
-				letsPrintThis += " : ";
-				//System.out.println("Please enter the class of the object named: " + object + ". CaSe SeNsItIvE!");
-				System.out.println("the class of the object: " + object + " is being assigned ActionObject");
-				letsPrintThis += "ActionObject()";
-				rule += "\t\t" + letsPrintThis + "\n";
-			}
+//			if(choice == 1)
+//			{
+//				rule += "\t\t"+object+" : "+type+"(name == \"" + logfile + "\") from dataObjectCol.getCollection() \n";
+//			}
+//			else
+//			{
+//				String letsPrintThis = object;
+//				letsPrintThis += " : ";
+//				//System.out.println("Please enter the class of the object named: " + object + ". CaSe SeNsItIvE!");
+//				System.out.println("the class of the object: " + object + " is being assigned ActionObject");
+//				letsPrintThis += "ActionObject()";
+//				rule += "\t\t" + letsPrintThis + "\n";
+//			}
+			//comment above back in to restore old functionality
 
 			System.out.println();
 
