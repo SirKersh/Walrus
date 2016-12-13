@@ -221,7 +221,7 @@ public class RuleCreator
 				System.out.println("Would you like to use the same object as last time? (y/n)"); // mod5c
 				newObjectSelectionString = scan.nextLine();// mod5c
 			}
-			if(additionalCondition == false || newObjectSelectionString.equals("n")) //mod5c
+			if(additionalCondition == false || newObjectSelectionString.equals("n")) //mod5c all code in this if {} is mod5c
 			{
 				System.out.println("Please enter the name of the object you wish to evaluate."); // @TO-DO
 				object = scan.nextLine(); //mod4b used to be after scan.nextLine(): + no
@@ -243,7 +243,7 @@ public class RuleCreator
 			}
 			else if(additionalCondition == true && newObjectSelectionString.equals("y")) //mod5c
 			{
-				// do the normal stuff but don't create the extra object
+				// dont think anything goes in here but just incase
 			}
 			
 			//comment below back in to restore old functionality
