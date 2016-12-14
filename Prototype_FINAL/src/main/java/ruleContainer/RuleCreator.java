@@ -243,7 +243,7 @@ public class RuleCreator
 			}
 			else if(additionalCondition == true && newObjectSelectionString.equals("y")) //mod5c
 			{
-				// dont think anything goes in here but just incase
+				// dont think anything goes in here but just in case
 			}
 			
 			//comment below back in to restore old functionality
@@ -309,10 +309,10 @@ public class RuleCreator
 			cond = scan.nextLine();
 
 			if (isNumber)
-				rule += "\t\t eval("+object +" != null&&" + object + ".getFieldInt(\"" + feild + "\")" + op + "" + cond
+				rule += "\t\t eval("+object +" != null&&" + object + ".hasField(\"" + feild +"\") && " + object + ".getFieldInt(\"" + feild + "\")" + op + "" + cond
 				+ ")\n";
 			else
-				rule += "\t\t eval("+object+" != null&&" + object + ".getField(\"" + feild + "\")" + op + "(\"" + cond
+				rule += "\t\t eval("+object+" != null&&" + object + ".hasField(\"" + feild +"\") && "+ object +".getField(\"" + feild + "\")" + op + "(\"" + cond
 				+ "\"))\n";
 
 			System.out.println("Enter 'done' if finished or press enter to create another condition.");
