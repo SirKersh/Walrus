@@ -1,5 +1,6 @@
 package alarm;
 
+
 import java.util.Random;
 
 public class FireAlarm implements Alarm
