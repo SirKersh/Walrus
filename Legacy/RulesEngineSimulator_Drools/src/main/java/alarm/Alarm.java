@@ -2,6 +2,7 @@ package alarm;
 
 public interface Alarm 
 {
+
 	public static final int NOT_TRIGGERED = 0;
 	public static final int TRIGGERED = 1;
 	
