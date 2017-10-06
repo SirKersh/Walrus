@@ -2,6 +2,7 @@ package alert;
 
 public class Alert 
 {
+
 	String alertMessage;
 	
 	public Alert()
